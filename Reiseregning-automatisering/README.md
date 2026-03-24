@@ -207,6 +207,14 @@ Give a step-by-step plan.
 
 ---
 
+## 🌍 STEG 10: (CRITICAL) MEASURE EFFECT
+
+How can we measure if this system is a success
+
+Find  KPI`s and how they can be measured.
+---
+
+
 ## 🧑‍🏫 Hvordan du fasiliterer live
 
 ### ⏱️ Tidsplan (45–60 min)
