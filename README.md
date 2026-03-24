@@ -4,6 +4,8 @@ Agentisk utvikling handler om å bygge systemer der autonome eller semi-autonome
 
 I stedet for at utviklere spesifiserer hver eneste regel, designer man systemer som kan *resonnere*, *planlegge* og *tilpasse seg* dynamisk.
 
+Teoretiske slider med tips og råd finnes her : https://docs.google.com/presentation/d/1qQKs8Z7BUh-pL1uqy_PsXe_6NK8SNvv19kAhVV640Oc/edit?usp=sharing
+
 ---
 
 ## 🧠 Hva er en agent?
