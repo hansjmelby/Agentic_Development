@@ -11,20 +11,22 @@ iterere som en “tech lead”
 
 En enkel CLI-app som:
 
-Tar inn en kvittering (tekst/mock)
-Ekstraherer info (fake AI / parsing)
-Validerer data
-Gir feedback til bruker
-Lager en “expense report”
+tar inn en kvittering (tekst/mock)
+ekstraherer info (fake AI / parsing)
+validerer data
+gir feedback til bruker
+lager en “expense report”
 
 👉 Viktig: ikke perfeksjon — fokus på agentisk flyt
 
-⚙️ Setup 
-Dere skal ikke kode manuelt. Dere skal styre Claude.
+⚙️ Setup
+
+Dere skal ikke kode manuelt.
+Dere skal styre Claude.
 
 🔁 STEG 1: Start i planning mode
 
-Skrive i Claude Code:
+Skriv i Claude Code:
 
 You are a senior software architect.
 
@@ -33,18 +35,19 @@ Do NOT write any code yet.
 I want to build a CLI tool for handling expense reports.
 
 The tool should:
-- accept receipt input (text for now)
-- extract relevant fields (date, amount, category)
-- validate the data
-- output a structured expense report
+
+accept receipt input (text for now)
+extract relevant fields (date, amount, category)
+validate the data
+output a structured expense report
 
 First:
-- ask clarifying questions
-- identify edge cases
-- propose possible architectures
+
+ask clarifying questions
+identify edge cases
+propose possible architectures
 
 Wait for my answers before continuing.
-
 💡 Hva skjer her
 
 Claude vil:
@@ -54,7 +57,7 @@ stille spørsmål som:
 “Should validation follow rules?”
 foreslå arkitektur
 
-👉 Dette er “agentisk kickoff”
+👉 Dette er agentisk kickoff
 
 🧩 STEG 2: Svar + få plan
 
@@ -65,31 +68,32 @@ Answer with reasonable assumptions if something is unclear.
 Now create a detailed implementation plan.
 
 Include:
-- project structure
-- modules/functions
-- data flow
-- validation logic
-- future extensibility
-💥 Viktig
-👉 “Ikke godta første plan – forbedre den”
+
+project structure
+modules/functions
+data flow
+validation logic
+future extensibility
+
+💥 Viktig:
+👉 Ikke godta første plan – forbedre den
 
 🔍 STEG 3: Kritisk review
 Critically review this plan:
 
-- what is overengineered?
-- what is missing?
-- how can we simplify it for an MVP?
-
+what is overengineered?
+what is missing?
+how can we simplify it for an MVP?
 Then improve the plan.
-
 🧱 STEG 4: Generer kode (nå skjer det)
 Now implement the project based on the improved plan.
 
 Requirements:
-- simple and clean code
-- runnable locally
-- include sample input
-- include basic validation
+
+simple and clean code
+runnable locally
+include sample input
+include basic validation
 
 Explain how to run it.
 💡 Typisk output
@@ -97,18 +101,19 @@ Explain how to run it.
 Claude lager f.eks:
 
 expense_app/
-  main.py
-  parser.py
-  validator.py
-  models.py
-
+├── main.py
+├── parser.py
+├── validator.py
+└── models.py
 ▶️ STEG 5: Kjør og test
 
-🧪 Etter kjøring :
+Etter kjøring:
+
 Create 3 test cases:
-- valid receipt
-- missing date
-- suspiciously high amount
+
+valid receipt
+missing date
+suspiciously high amount
 
 Show expected outputs.
 🔁 STEG 6: Iterasjon (her skjer magien)
@@ -116,18 +121,19 @@ Show expected outputs.
 Be dem bruke Claude som utvikler:
 
 Eksempler:
-Improve error handling.
-Refactor the code to be more modular.
-Add logging to show agent-like steps.
-Make the CLI interactive.
 
+Improve error handling
+Refactor the code to be more modular
+Add logging to show agent-like steps
+Make the CLI interactive
 🤖 STEG 7: Gjør det “agentisk”
 Transform this into a multi-agent system.
 
 Define:
-- a parser agent
-- a validation agent
-- a feedback agent
+
+a parser agent
+a validation agent
+a feedback agent
 
 Refactor the code to reflect this architecture.
 
@@ -139,8 +145,9 @@ Replace the parser with a mock AI function that simulates OCR extraction.
 Make it slightly unreliable to simulate real-world issues.
 🌍 STEG 9: (BONUS) Deploy mindset
 How could this be turned into:
-- an API
-- a web app
+
+an API
+a web app
 
 Give a step-by-step plan.
 🧑‍🏫 Hvordan du fasiliterer live
@@ -151,19 +158,13 @@ Code gen → 10 min
 Testing → 10 min
 Iteration → 10 min
 Demo → 10 min
-🔥 Viktige læringspoeng 
-1. Intent > kode
-
-“Dere skrev nesten ingen kode – men bygde en app”
-
-2. Planning mode = cheat code
-
-“Dette er forskjellen på mediocre og powerful bruk”
-
-3. Claude = team
-
-“Dette er ikke et verktøy – det er et team”
-
+🔥 Viktige læringspoeng
+Intent > kode
+→ “Dere skrev nesten ingen kode – men bygde en app”
+Planning mode = cheat code
+→ “Dette er forskjellen på mediocre og powerful bruk”
+Claude = team
+→ “Dette er ikke et verktøy – det er et team”
 ⚠️ Vanlige feil
 Hopper over planning mode
 Tar første svar som fasit
