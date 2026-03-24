@@ -212,11 +212,11 @@ Give a step-by-step plan.
 Hvordan kan vi måle om dette systemet er vellykket?
 
 Gi konkrete KPIer og hvordan de måles.
-💡 Typiske KPIer:
-⏱️ behandlingstid (fra 10 dager → 1 dag)
-❌ feilrate
-😊 bruker-tilfredshet
-🔁 antall manuelle steg
+- 💡 Typiske KPIer:
+- ⏱️ behandlingstid (fra 10 dager → 1 dag)
+- ❌ feilrate
+- 😊 bruker-tilfredshet
+- 🔁 antall manuelle steg
 ---
 
 
