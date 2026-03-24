@@ -1,5 +1,19 @@
 # 💻 Claude Code oppgave: Reiseregning-automatisering
 
+## 🧑‍🏫 Hvordan du fasiliterer live
+
+### ⏱️ Tidsplan (45–60 min)
+
+- Planning mode → 10 min  
+- Plan + review → 10 min  
+- Code gen → 10 min  
+- Testing → 10 min  
+- Iteration → 10 min  
+- Demo → 10 min  
+
+---
+
+
 ## 🎯 Mål
 
 Deltakerne skal:
@@ -217,20 +231,6 @@ Gi konkrete KPIer og hvordan de måles.
 - ❌ feilrate
 - 😊 bruker-tilfredshet
 - 🔁 antall manuelle steg
----
-
-
-## 🧑‍🏫 Hvordan du fasiliterer live
-
-### ⏱️ Tidsplan (45–60 min)
-
-- Planning mode → 10 min  
-- Plan + review → 10 min  
-- Code gen → 10 min  
-- Testing → 10 min  
-- Iteration → 10 min  
-- Demo → 10 min  
-
 ---
 
 ## 🔥 Viktige læringspoeng
