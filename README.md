@@ -50,11 +50,11 @@ Dette repoet gir deg en praktisk introduksjon til agentisk utvikling:
 
 ---
 
-## 📁 Eksempler
+## 📁 Eksempler/Oppgaver
 
 Se sub kataloger for  konkrete implementasjoner/maler:
 
-- `Reiseregning-automatisering/` – En minimal agent med plan → handling → evaluering
+- `Reiseregning-automatisering/` – En oppskrift på å sette opp en flyt for å registrere reise regninger
 
 
 ---
