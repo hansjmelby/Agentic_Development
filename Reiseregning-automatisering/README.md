@@ -209,9 +209,14 @@ Give a step-by-step plan.
 
 ## 🌍 STEG 10: (CRITICAL) MEASURE EFFECT
 
-How can we measure if this system is a success
+Hvordan kan vi måle om dette systemet er vellykket?
 
-Find  KPI`s and how they can be measured.
+Gi konkrete KPIer og hvordan de måles.
+💡 Typiske KPIer:
+⏱️ behandlingstid (fra 10 dager → 1 dag)
+❌ feilrate
+😊 bruker-tilfredshet
+🔁 antall manuelle steg
 ---
 
 
