@@ -3,7 +3,6 @@
 ## Bakgrunn
 
 Dette dokumentet beskriver oppgaven med å lage en **code QA skill** for Kotlin og Java,
-til bruk i Claude Code og andre agentmiljøer som støtter `npx skills`-systemet.
 
 En skill er en pakket instruksjonsfil (`SKILL.md`) som gir Claude spesialisert kunnskap og
 arbeidsflyt for et avgrenset domene. Skills installeres lokalt i et prosjekt og spores via
