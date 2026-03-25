@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "skills": {
+    "gws-calendar": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "80fb17c2ef70efab8c2ae1834a1320fa6f4d60dfd07f98dbf8e5333fee4f6c6e"
+    },
+    "gws-calendar-agenda": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "33145c0b4cd346ea4022750147323a5b414a530a57052e50d1696467efb5d2ea"
+    },
+    "gws-calendar-insert": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "a5bcf4f79d402fa95e9e961168a6b78b7f13e78e37845eafe2b121c6a3bc8797"
+    },
+    "gws-docs": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "c6b1bf1f85a01839332be37a305a7a7ab4dbe9ab785c58bb329acb2faa603e2a"
+    },
+    "gws-drive": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "ddb69790fb3429590c2f6495bec774dd751796d2ca2004ca86dff8e1cf925117"
+    },
+    "gws-drive-upload": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "3faaf7321aaa51a29ce406cb8bb0e546ee62fdb26e51946a6898287af47b843a"
+    },
+    "gws-gmail": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "29e16501a4406afa68a8dc314cdbe06eb209b52b25dadc43b2dd278f44e33592"
+    },
+    "gws-slides": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "14207ef4398c91cd6fa78442224692e7e5c54588c7e514b1c821bf2518fcb688"
+    },
+    "gws-tasks": {
+      "source": "googleworkspace/cli",
+      "sourceType": "github",
+      "computedHash": "3e9fdfada4475dc2dc41603758bc2195756be064f9f53506589a5ad36e4e22dd"
+    }
+  }
+}
