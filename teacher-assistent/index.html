@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Assistant</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:    #2563eb;
+      --blue-lt: #eff6ff;
+      --blue-dk: #1d4ed8;
+      --green:   #16a34a;
+      --green-lt:#f0fdf4;
+      --amber:   #d97706;
+      --amber-lt:#fffbeb;
+      --red:     #dc2626;
+      --red-lt:  #fef2f2;
+      --gray-50: #f8fafc;
+      --gray-100:#f1f5f9;
+      --gray-200:#e2e8f0;
+      --gray-300:#cbd5e1;
+      --gray-500:#64748b;
+      --gray-700:#334155;
+      --gray-900:#0f172a;
+      --radius:  10px;
+      --shadow:  0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-lg: 0 10px 25px rgba(0,0,0,.1);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      min-height: 100vh;
+    }
+
+    /* ---- Header ---- */
+    header {
+      background: white;
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .logo svg { width: 28px; height: 28px; }
+    .header-actions { display: flex; gap: 8px; align-items: center; }
+
+    /* ---- Buttons ---- */
+    button {
+      cursor: pointer;
+      font-family: inherit;
+      font-size: .875rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 7px;
+      padding: 7px 14px;
+      transition: background .15s, box-shadow .15s;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+    }
+    .btn-primary:hover { background: var(--blue-dk); }
+    .btn-secondary {
+      background: white;
+      color: var(--gray-700);
+      border: 1px solid var(--gray-200);
+    }
+    .btn-secondary:hover { background: var(--gray-100); }
+    .btn-success {
+      background: var(--green);
+      color: white;
+    }
+    .btn-success:hover { filter: brightness(1.1); }
+    .btn-icon {
+      background: none;
+      padding: 6px;
+      color: var(--gray-500);
+      display: flex;
+      align-items: center;
+    }
+    .btn-icon:hover { color: var(--blue); background: var(--blue-lt); }
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    /* ---- Layout ---- */
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 24px 60px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* ---- Cards ---- */
+    .card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .card-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-title {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .card-body { padding: 18px; }
+
+    /* ---- Form fields ---- */
+    label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 6px;
+    }
+    select, input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--gray-300);
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: .875rem;
+      color: var(--gray-900);
+      background: white;
+      transition: border .15s, box-shadow .15s;
+      -webkit-appearance: none;
+    }
+    select:focus, input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+    }
+    .field { margin-bottom: 16px; }
+    .field:last-child { margin-bottom: 0; }
+
+    textarea {
+      width: 100%;
+      border: 1px solid var(--gray-300);
+      border-radius: 7px;
+      font-family: inherit;
+      font-size: .9rem;
+      color: var(--gray-900);
+      padding: 12px;
+      line-height: 1.6;
+      resize: vertical;
+    }
+
+    /* ---- Assignment panel (left) ---- */
+    .left-panel { display: flex; flex-direction: column; gap: 16px; }
+
+    #assignment-text {
+      min-height: 160px;
+      max-height: 300px;
+    }
+
+    /* ---- Essay panel (right) ---- */
+    .right-panel { display: flex; flex-direction: column; gap: 16px; }
+
+    #essay-text {
+      min-height: 340px;
+      font-size: .95rem;
+    }
+
+    .essay-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      border-top: 1px solid var(--gray-100);
+      background: var(--gray-50);
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+    .word-count {
+      font-size: .85rem;
+      color: var(--gray-500);
+    }
+    .word-count strong { color: var(--blue); font-size: 1.05em; }
+    .essay-actions { display: flex; gap: 8px; }
+
+    /* ---- API Key card ---- */
+    .api-note {
+      font-size: .78rem;
+      color: var(--gray-500);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+    .api-note a { color: var(--blue); text-decoration: none; }
+    .api-note a:hover { text-decoration: underline; }
+
+    /* ---- Save sessions ---- */
+    .sessions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .session-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border: 1px solid var(--gray-200);
+      border-radius: 7px;
+      font-size: .8rem;
+      cursor: pointer;
+      transition: background .12s;
+    }
+    .session-item:hover { background: var(--blue-lt); border-color: var(--blue); }
+    .session-item .session-meta { color: var(--gray-500); font-size: .75rem; }
+    .session-item .del-btn { color: var(--gray-300); font-size: 1rem; background: none; padding: 2px 4px; }
+    .session-item .del-btn:hover { color: var(--red); background: var(--red-lt); border-radius: 4px; }
+    .no-sessions { font-size: .82rem; color: var(--gray-500); text-align: center; padding: 12px 0; }
+
+    /* ---- Rubric ---- */
+    .rubric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .rubric-item {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 14px;
+      transition: border-color .2s;
+    }
+    .rubric-item.score-high   { border-color: var(--green); background: var(--green-lt); }
+    .rubric-item.score-mid    { border-color: var(--amber); background: var(--amber-lt); }
+    .rubric-item.score-low    { border-color: var(--red);   background: var(--red-lt); }
+    .rubric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .rubric-label {
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--gray-700);
+    }
+    .rubric-score {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .score-high .rubric-score { color: var(--green); }
+    .score-mid  .rubric-score { color: var(--amber); }
+    .score-low  .rubric-score { color: var(--red);   }
+    .score-bar-wrap {
+      height: 5px;
+      background: var(--gray-200);
+      border-radius: 99px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .score-bar {
+      height: 100%;
+      border-radius: 99px;
+      transition: width .5s ease;
+    }
+    .score-high .score-bar { background: var(--green); }
+    .score-mid  .score-bar { background: var(--amber); }
+    .score-low  .score-bar { background: var(--red);   }
+    .rubric-feedback {
+      font-size: .82rem;
+      color: var(--gray-700);
+      line-height: 1.55;
+    }
+
+    .overall-feedback {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: var(--blue-lt);
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius);
+      font-size: .875rem;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+    .overall-feedback strong { color: var(--blue); display: block; margin-bottom: 6px; }
+
+    /* ---- Spinner ---- */
+    .spinner-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 0;
+      gap: 12px;
+      color: var(--gray-500);
+      font-size: .875rem;
+    }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid var(--gray-200);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---- Empty rubric state ---- */
+    .rubric-empty {
+      text-align: center;
+      padding: 32px 20px;
+      color: var(--gray-500);
+    }
+    .rubric-empty svg { width: 48px; height: 48px; opacity: .35; margin-bottom: 12px; }
+    .rubric-empty p { font-size: .875rem; }
+
+    /* ---- Error banner ---- */
+    .error-banner {
+      background: var(--red-lt);
+      border: 1px solid #fca5a5;
+      color: var(--red);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: .85rem;
+      line-height: 1.5;
+    }
+
+    /* ---- Badge ---- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: .72rem;
+      font-weight: 600;
+    }
+    .badge-blue { background: var(--blue-lt); color: var(--blue); }
+
+    /* ---- Modal ---- */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 20px;
+    }
+    .modal-overlay.hidden { display: none; }
+    .modal {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 400px;
+      padding: 24px;
+    }
+    .modal h3 { font-size: 1rem; margin-bottom: 14px; }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 860px) {
+      main { grid-template-columns: 1fr; }
+      .rubric-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="28" height="28" rx="7" fill="#2563eb"/>
+      <path d="M7 9h14M7 14h10M7 19h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    Teacher Assistant
+  </div>
+  <div class="header-actions">
+    <button class="btn-secondary" onclick="openSaveModal()">Save Session</button>
+    <button class="btn-secondary" onclick="toggleSessions()">Load Session</button>
+  </div>
+</header>
+
+<!-- ====== MAIN LAYOUT ====== -->
+<main>
+
+  <!-- ---- LEFT PANEL ---- -->
+  <div class="left-panel">
+
+    <!-- Assignment Details -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 2h11v11H2z" stroke="currentColor" stroke-width="1.3" rx="1"/><path d="M4 5h7M4 8h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Assignment
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <label for="school-level">School Level</label>
+          <select id="school-level">
+            <option value="">-- Select level --</option>
+            <option value="Elementary School (Grades 1-5)">Elementary School (Grades 1-5)</option>
+            <option value="Middle School (Grades 6-8)">Middle School (Grades 6-8)</option>
+            <option value="High School (Grades 9-12)">High School (Grades 9-12)</option>
+            <option value="Undergraduate (University)">Undergraduate (University)</option>
+            <option value="Graduate (Masters/PhD)">Graduate (Masters/PhD)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="assignment-text">Assignment Prompt / Question</label>
+          <textarea id="assignment-text" rows="7" placeholder="Paste or type the assignment instructions here - the question, requirements, word count expectations, etc."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Key -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M5.5 9.5a4 4 0 100-8 4 4 0 000 8zm4-4h5m-2-2v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          AI Settings
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <label for="api-key">Anthropic API Key</label>
+          <input type="password" id="api-key" placeholder="sk-ant-..." />
+          <p class="api-note">
+            Your key is stored only in your browser (localStorage) and sent directly to the Anthropic API.
+            Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Saved Sessions (collapsible) -->
+    <div class="card" id="sessions-card" style="display:none">
+      <div class="card-header">
+        <span class="card-title">Saved Sessions</span>
+      </div>
+      <div class="card-body" style="padding:12px">
+        <div class="sessions-list" id="sessions-list"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ---- RIGHT PANEL ---- -->
+  <div class="right-panel">
+
+    <!-- Essay Editor -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 2h11v11H2z" stroke="currentColor" stroke-width="1.3" rx="1"/><path d="M4 5h7M4 8h7M4 11h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Your Essay
+        </span>
+        <span class="badge badge-blue" id="level-badge" style="display:none"></span>
+      </div>
+      <div class="card-body" style="padding: 0;">
+        <textarea
+          id="essay-text"
+          style="border:none; border-radius:0; box-shadow:none; min-height:360px; padding:16px;"
+          placeholder="Start writing your essay here..."
+        ></textarea>
+      </div>
+      <div class="essay-footer">
+        <div class="word-count">
+          Words: <strong id="word-count">0</strong>
+          <span id="target-hint" style="color:var(--gray-300)"></span>
+        </div>
+        <div class="essay-actions">
+          <button class="btn-secondary" onclick="clearEssay()">Clear</button>
+          <button class="btn-success" id="get-feedback-btn" onclick="getFeedback()">
+            Get Feedback
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rubric Feedback -->
+    <div class="card" id="rubric-card">
+      <div class="card-header">
+        <span class="card-title">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 7.5A5.5 5.5 0 112 7.5a5.5 5.5 0 0111 0z" stroke="currentColor" stroke-width="1.3"/><path d="M5 7.5l1.5 1.5 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Feedback Rubric
+        </span>
+        <span id="rubric-total" style="font-size:.82rem;color:var(--gray-500)"></span>
+      </div>
+      <div class="card-body" id="rubric-body">
+        <div class="rubric-empty">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="32" height="32" rx="5" stroke="currentColor" stroke-width="2"/>
+            <path d="M15 19h18M15 26h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <p>Write your essay and click <strong>Get Feedback</strong> to see your rubric.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ====== SAVE MODAL ====== -->
+<div class="modal-overlay hidden" id="save-modal">
+  <div class="modal">
+    <h3>Save Session</h3>
+    <div class="field">
+      <label for="session-name">Session Name</label>
+      <input type="text" id="session-name" placeholder="e.g. History Essay - Draft 1" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeSaveModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveSession()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== STATE ==========
+const $ = id => document.getElementById(id);
+
+// ========== WORD COUNT ==========
+$('essay-text').addEventListener('input', updateWordCount);
+
+function countWords(text) {
+  return text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+}
+
+function updateWordCount() {
+  const n = countWords($('essay-text').value);
+  $('word-count').textContent = n;
+}
+
+// ========== SCHOOL LEVEL BADGE ==========
+$('school-level').addEventListener('change', function() {
+  const badge = $('level-badge');
+  if (this.value) {
+    badge.textContent = this.value;
+    badge.style.display = 'inline-flex';
+  } else {
+    badge.style.display = 'none';
+  }
+});
+
+// ========== CLEAR ESSAY ==========
+function clearEssay() {
+  if (!$('essay-text').value || confirm('Clear the essay? This cannot be undone.')) {
+    $('essay-text').value = '';
+    updateWordCount();
+  }
+}
+
+// ========== SAVE / LOAD SESSIONS ==========
+const STORAGE_KEY = 'teacher_assistant_sessions';
+
+function getSessions() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; }
+}
+
+function openSaveModal() {
+  const now = new Date();
+  $('session-name').value = 'Essay - ' + now.toLocaleDateString();
+  $('save-modal').classList.remove('hidden');
+  setTimeout(() => $('session-name').select(), 50);
+}
+
+function closeSaveModal() {
+  $('save-modal').classList.add('hidden');
+}
+
+function saveSession() {
+  const name = $('session-name').value.trim();
+  if (!name) { $('session-name').focus(); return; }
+  const sessions = getSessions();
+  sessions[name] = {
+    name,
+    savedAt: new Date().toISOString(),
+    assignment: $('assignment-text').value,
+    schoolLevel: $('school-level').value,
+    essay: $('essay-text').value,
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+  closeSaveModal();
+  renderSessions();
+  showToast('Session saved.');
+}
+
+function loadSession(name) {
+  const sessions = getSessions();
+  const s = sessions[name];
+  if (!s) return;
+  $('assignment-text').value  = s.assignment  || '';
+  $('school-level').value      = s.schoolLevel || '';
+  $('essay-text').value        = s.essay       || '';
+  updateWordCount();
+  $('school-level').dispatchEvent(new Event('change'));
+  $('sessions-card').style.display = 'none';
+  showToast('Session loaded.');
+}
+
+function deleteSession(name) {
+  if (!confirm('Delete "' + name + '"?')) return;
+  const sessions = getSessions();
+  delete sessions[name];
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+  renderSessions();
+}
+
+function renderSessions() {
+  const sessions = getSessions();
+  const list = $('sessions-list');
+  const keys = Object.keys(sessions);
+  if (keys.length === 0) {
+    list.innerHTML = '<div class="no-sessions">No saved sessions yet.</div>';
+    return;
+  }
+  list.innerHTML = keys.map(k => {
+    const s = sessions[k];
+    const date = new Date(s.savedAt).toLocaleDateString();
+    return `<div class="session-item" onclick="loadSession('${esc(k)}')">
+      <div>
+        <div>${esc(k)}</div>
+        <div class="session-meta">${date} - ${countWords(s.essay || '')} words</div>
+      </div>
+      <button class="del-btn" title="Delete" onclick="event.stopPropagation();deleteSession('${esc(k)}')">&times;</button>
+    </div>`;
+  }).join('');
+}
+
+function toggleSessions() {
+  const card = $('sessions-card');
+  if (card.style.display === 'none') {
+    card.style.display = '';
+    renderSessions();
+  } else {
+    card.style.display = 'none';
+  }
+}
+
+function esc(s) {
+  return s.replace(/'/g, "\\'").replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// Save API key in localStorage
+$('api-key').addEventListener('change', function() {
+  if (this.value) localStorage.setItem('ta_api_key', this.value);
+});
+window.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('ta_api_key');
+  if (saved) $('api-key').value = saved;
+});
+
+// ========== FEEDBACK VIA CLAUDE API ==========
+async function getFeedback() {
+  const apiKey    = $('api-key').value.trim();
+  const assignment = $('assignment-text').value.trim();
+  const essay      = $('essay-text').value.trim();
+  const level      = $('school-level').value;
+
+  if (!apiKey)     { showRubricError('Please enter your Anthropic API key in the AI Settings panel.'); return; }
+  if (!assignment) { showRubricError('Please enter the assignment prompt first.'); return; }
+  if (!essay)      { showRubricError('Please write some essay content before requesting feedback.'); return; }
+  if (!level)      { showRubricError('Please select a school level so feedback is calibrated correctly.'); return; }
+
+  showRubricSpinner();
+  $('get-feedback-btn').disabled = true;
+
+  const systemPrompt = `You are an experienced teacher evaluating student essays.
+Provide fair, constructive, and encouraging feedback.
+Always respond with ONLY valid JSON - no markdown fences, no extra text.`;
+
+  const userPrompt = `Evaluate the following essay for a ${level} student.
+
+ASSIGNMENT PROMPT:
+${assignment}
+
+STUDENT ESSAY:
+${essay}
+
+Return a JSON object with EXACTLY this structure:
+{
+  "grammar":            { "score": <1-10>, "feedback": "<2-3 sentences>" },
+  "structure":          { "score": <1-10>, "feedback": "<2-3 sentences>" },
+  "contentRelevance":   { "score": <1-10>, "feedback": "<2-3 sentences>" },
+  "answersQuestion":    { "score": <1-10>, "feedback": "<2-3 sentences>" },
+  "appropriateLevel":   { "score": <1-10>, "feedback": "<2-3 sentences>" },
+  "meetsRequirements":  { "score": <1-10>, "feedback": "<2-3 sentences>" },
+  "overallFeedback": "<3-4 sentences of overall constructive feedback>"
+}
+
+Scoring guide: 9-10 = Excellent, 7-8 = Good, 5-6 = Adequate, 3-4 = Needs improvement, 1-2 = Major revision needed.
+Be encouraging but honest. Calibrate expectations to ${level}.`;
+
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        apiKey,
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1200,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userPrompt }]
+      })
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error?.message || 'API request failed (status ' + response.status + ')');
+    }
+
+    const data = await response.json();
+    const raw  = data.content[0].text.trim();
+    let rubric;
+    try {
+      rubric = JSON.parse(raw);
+    } catch {
+      // Try to extract JSON if wrapped in backticks
+      const match = raw.match(/\{[\s\S]*\}/);
+      if (match) rubric = JSON.parse(match[0]);
+      else throw new Error('Could not parse feedback. Please try again.');
+    }
+
+    renderRubric(rubric);
+  } catch (err) {
+    showRubricError(err.message || 'An unexpected error occurred.');
+  } finally {
+    $('get-feedback-btn').disabled = false;
+  }
+}
+
+// ========== RUBRIC RENDERING ==========
+const CRITERIA = [
+  { key: 'grammar',           label: 'Grammar',              icon: '✏' },
+  { key: 'structure',         label: 'Structure',            icon: '🏗' },
+  { key: 'contentRelevance',  label: 'Content Relevance',    icon: '🎯' },
+  { key: 'answersQuestion',   label: 'Answers the Question', icon: '❓' },
+  { key: 'appropriateLevel',  label: 'Appropriate Level',    icon: '🎓' },
+  { key: 'meetsRequirements', label: 'Meets Requirements',   icon: '✅' },
+];
+
+function scoreClass(score) {
+  if (score >= 8) return 'score-high';
+  if (score >= 5) return 'score-mid';
+  return 'score-low';
+}
+
+function renderRubric(rubric) {
+  let total = 0;
+  let count = 0;
+
+  const items = CRITERIA.map(c => {
+    const item = rubric[c.key] || { score: 0, feedback: 'No feedback available.' };
+    const score = Math.min(10, Math.max(0, Number(item.score) || 0));
+    total += score;
+    count++;
+    const cls = scoreClass(score);
+    return `<div class="rubric-item ${cls}">
+      <div class="rubric-header">
+        <div class="rubric-label">${c.icon} ${c.label}</div>
+        <div class="rubric-score">${score}/10</div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar" style="width:${score * 10}%"></div>
+      </div>
+      <div class="rubric-feedback">${escHtml(item.feedback)}</div>
+    </div>`;
+  }).join('');
+
+  const avg = count ? (total / count).toFixed(1) : 0;
+  $('rubric-total').textContent = `Overall: ${avg}/10`;
+
+  const overall = rubric.overallFeedback
+    ? `<div class="overall-feedback"><strong>Overall Feedback</strong>${escHtml(rubric.overallFeedback)}</div>`
+    : '';
+
+  $('rubric-body').innerHTML = `<div class="rubric-grid">${items}</div>${overall}`;
+}
+
+function showRubricSpinner() {
+  $('rubric-total').textContent = '';
+  $('rubric-body').innerHTML = `<div class="spinner-wrap">
+    <div class="spinner"></div>
+    <span>Analyzing your essay...</span>
+  </div>`;
+}
+
+function showRubricError(msg) {
+  $('rubric-total').textContent = '';
+  $('rubric-body').innerHTML = `<div class="error-banner">${escHtml(msg)}</div>`;
+}
+
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ========== TOAST ==========
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = `
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+    background:#0f172a; color:white; padding:10px 20px; border-radius:8px;
+    font-size:.85rem; z-index:999; opacity:0; transition:opacity .2s;
+  `;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(() => { t.style.opacity = '1'; });
+  setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 250); }, 2000);
+}
+
+// ========== SAVE MODAL KEYBOARD ==========
+$('save-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeSaveModal();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSaveModal();
+});
+$('session-name').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') saveSession();
+});
+</script>
+</body>
+</html>

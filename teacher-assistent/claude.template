@@ -1,0 +1,34 @@
+# Project
+
+This project generates dayly social content across LinkedIn, X 
+and Instagram in by brand voice, pulling topics from a content calendar in Airtable.
+# How It Works
+
+- [Where the content calendar lives]
+- [Where drafts get saved]
+- [Where brand assets are stored]
+
+# Brand Voice
+
+IMPORTANT:
+- [How you sound — conversational? authoritative? cheeky?]
+- [Words/phrases you NEVER use]
+- [Sentence style — short and punchy? storytelling?]
+
+# Platform Rules
+
+- LinkedIn: [format, length, CTA style]
+- X: [format, hashtag policy, thread rules]
+- Instagram: [caption length, hashtag count, tone]
+
+# Gotchas
+
+- [Counterintuitive thing about your setup]
+- [Legacy stuff to avoid]
+- [Audience assumption Claude might get wrong]
+
+# Workflow
+
+- [How many variations per post]
+- [File naming convention]
+- [What Claude should never do without your approval]

@@ -1,0 +1,8 @@
+{
+  "name": "teacher-assistant",
+  "version": "1.0.0",
+  "description": "Teacher assistant landing page with Claude AI feedback",
+  "engines": {
+    "node": ">=18"
+  }
+}
