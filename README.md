@@ -1,6 +1,14 @@
 # Før workshoppen
 - Installer en agent (vi bruker claude som demo, men du kan bruke hva du vil)
-  - mac : brew install --cask claude-code
+
+## installasjon MAC OS
+- mac : brew install --cask claude-code (prøv dette først)
+alternativt 
+- [Innstallasjon MAC OS](./installation-commands-mac.pdf)
+- export ANTHROPIC_API_KEY="din_api_nøkkel_her"
+
+## installasjon Windows
+- [Innstallasjon Windows](./installation-commands-windows.pdf)
 - export ANTHROPIC_API_KEY="din_api_nøkkel_her"
 
 # 🚀 Introduksjon til Agentisk Utvikling
