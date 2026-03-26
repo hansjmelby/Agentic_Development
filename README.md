@@ -1,3 +1,8 @@
+# Før workshoppen
+- Installer en agent (vi bruker claude som demo, men du kan bruke hva du vil)
+  - mac : brew install --cask claude-code
+- export ANTHROPIC_API_KEY="din_api_nøkkel_her"
+
 # 🚀 Introduksjon til Agentisk Utvikling
 
 Agentisk utvikling handler om å bygge systemer der autonome eller semi-autonome "agenter" kan ta beslutninger, utføre oppgaver og samarbeide for å løse komplekse problemer. Disse agentene bruker ofte store språkmodeller (LLMs), verktøy og minne for å handle mer selvstendig enn tradisjonell programvare.
