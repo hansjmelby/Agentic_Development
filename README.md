@@ -69,7 +69,12 @@ Dette repoet gir deg en praktisk introduksjon til agentisk utvikling:
 
 Se sub kataloger for  konkrete implementasjoner/maler:
 
-- `Reiseregning-automatisering/` – En oppskrift på å sette opp en flyt for å registrere reise regninger
+- `Reiseregning-automatisering/` – Oppgave : En beskrivelse av steg for å sette opp en flyt for å registrere reise regninger
+- `Reiseregning-demo/` – resultat : hva som skjer om man følegr oppskriften rått og brutalt uten å gjøre noen endringer, samt ikke bry seg om alt vi har snakket om i teori biten
+- `google-workspace-cli/` – en referanse til et eget google workspace CLI som en agent kan utnytte for å hente informasjon fra gmail, calender osv
+- Get-Shit-Done/` – en referanse til GSD rammeverket som er rammeverk for utvikling, oppfølging osv.
+- teacher-assistent - et eksempel på ren wibe coding i Claude uten særlig mye info i claude.md fil, men en veldig! detalkert prompt
+- Kotlin_Java_code_QA_skill - Oppgave der du skal lage en egen skill som gjør kode QA av et stort repo vi vinner på nettet
 
 
 ---
