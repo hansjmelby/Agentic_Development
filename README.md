@@ -4,6 +4,7 @@
 - export ANTHROPIC_API_KEY="din_api_nøkkel_her"
 
 [Innstallasjon MAC OS](./installation-commands-mac.pdf)
+[Innstallasjon Windows](./installation-commands-windows.pdf)
 
 # 🚀 Introduksjon til Agentisk Utvikling
 
